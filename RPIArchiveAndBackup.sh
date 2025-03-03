@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-BACKUP_DIR="/mnt/usbdata"
+BACKUP_DIR="/mnt/usbdata/backup"
 ARCHIVE_NAME="backup_$(date +%Y%m%d_%H%M%S).tar.gz"
 ARCHIVE_PATH="$BACKUP_DIR/$ARCHIVE_NAME"
 SMB_SHARE="//<IP address>/RPI_backup"
