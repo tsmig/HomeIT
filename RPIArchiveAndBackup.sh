@@ -29,13 +29,13 @@ sudo tar --exclude="$BACKUP_DIR" \
           --warning=no-file-changed \
           --ignore-failed-read \
           -czvf "$ARCHIVE_PATH" / 2> "$TAR_ERROR_LOG"
+tar_exit_code=$?
 
-# Check if tar command succeeded
-if [ $? -ne 0 ]; then
+# Check if tar encountered a critical error (exit code not 0 but ignore warnings)
+if [ $tar_exit_code -ne 0 ] && ! grep -q "Removing leading \`/' from" $TAR_ERROR_LOG; then
   log "Error creating archive. Check $TAR_ERROR_LOG for details. Exiting."
   exit 1
 fi
-
 log "Archive created at $ARCHIVE_PATH"
 
 # Mount the SMB share (if not already mounted)
